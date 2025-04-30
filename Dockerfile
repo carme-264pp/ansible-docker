@@ -5,8 +5,8 @@ ENV HOSTNAME=ansible
 
 RUN groupadd -g 1000 ansible && useradd -ms /bin/bash -u 1000 -g 1000 ansible
 RUN \
-  --mount type=cache,target=/var/lib/apt/lists,sharing=locked \
-  --mount type=cache,target=/var/cache/apt,sharing=locked \
+  --mount=type=cache,target=/var/lib/apt/lists,sharing=locked \
+  --mount=type=cache,target=/var/cache/apt,sharing=locked \
   apt update && apt install -y --no-install-recommends \
   git curl
 
@@ -15,5 +15,5 @@ ENV PATH=$PATH:/home/ansible/.local/bin
 WORKDIR /home/ansible
 
 RUN \
-  --mount type=bind,source=.,target=/home/ansible/build \
+  --mount=type=bind,source=.,target=/home/ansible/build \
   python3 -m pip install --user --no-cache-dir -r build/requirements.txt
