@@ -16,4 +16,5 @@ WORKDIR /home/ansible
 
 RUN \
   --mount=type=bind,source=.,target=/home/ansible/build \
-  python3 -m pip install --user --no-cache-dir -r build/requirements.txt
+  --mount=type=cache,target=/home/ansible/.cache/pip \
+  python3 -m pip install --user -r build/requirements.txt
